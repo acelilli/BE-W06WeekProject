@@ -1,0 +1,126 @@
+﻿@model BE_W06WeekProject.Models.Prenotazione
+
+@{
+    ViewBag.Title = "NuovaPrenotazione";
+}
+
+<h2>NuovaPrenotazione</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Prenotazione</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDCliente, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IDCliente, new SelectList(Model.ClientList, "Value", "Text"), "-- Seleziona cliente --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDCliente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDCamera, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IDCamera, new SelectList(Model.RoomList, "Value", "Text"), "-- Seleziona Stanza --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDCamera, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDServizio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IDServizio, new SelectList(Model.ServicesList, "Value", "Text"), "-- Servizio --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDServizio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataPrenotazione, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DataPrenotazione, new { htmlAttributes = new { @class = "form-control", type = "datetime-local", @id = "DataPrenotazione" } })
+                @Html.ValidationMessageFor(model => model.DataPrenotazione, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CheckIn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CheckIn, new { htmlAttributes = new { @class = "form-control", type = "datetime-local", @id = "CheckIn" } })
+                @Html.ValidationMessageFor(model => model.CheckIn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CheckOut, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CheckOut, new { htmlAttributes = new { @class = "form-control", type = "datetime-local", @id = "CheckOut" } })
+                @Html.ValidationMessageFor(model => model.CheckOut, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Anticipo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Anticipo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Anticipo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotaleSaldo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TotaleSaldo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TotaleSaldo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Funzione per formattare la data e l'ora nel formato richiesto prima dell'invio al controller
+        function formatDate(date) {
+                var year = date.getFullYear();
+                var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                var day = ('0' + date.getDate()).slice(-2);
+                var hours = ('0' + date.getHours()).slice(-2);
+                var minutes = ('0' + date.getMinutes()).slice(-2);
+                return year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+        }
+
+        // Ascolta il submit del form e formatta la data e l'ora prima dell'invio al controller
+        document.querySelector('form').addEventListener('submit', function (event) {
+            // Formatta la data e l'ora per CheckIn
+            var checkInInput = document.getElementById('CheckIn');
+            var checkInDate = new Date(checkInInput.value);
+            checkInInput.value = formatDate(checkInDate);
+
+            // Formatta la data e l'ora per CheckOut
+            var checkOutInput = document.getElementById('CheckOut');
+            var checkOutDate = new Date(checkOutInput.value);
+            checkOutInput.value = formatDate(checkOutDate);
+
+            var checkInInput = document.getElementById('DataPrenotazione');
+            var checkInDate = new Date(dataPrenotazioneInput.value);
+            checkInInput.value = formatDate(dataPrenotazioneDate);
+        });
+    });
+</script>

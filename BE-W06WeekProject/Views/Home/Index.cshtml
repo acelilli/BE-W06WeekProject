@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <h1>Benvenut* in Polaris Hotel!</h1>
+        <h2>Servizi disponibili:</h2>
+        <!-- Qui metto i risultati delle azioni asincrone -->
+        <!--
+    <div class="row py-3">
+        <div class="col-md-6">
+            <div class="card  bg-dark border border-secondary">
+                <div class="card-body">
+                    <h5 class="card-title">Spedizioni in consegna oggi</h5>
+                    <p class="card-text">Numero di spedizioni: chiocciola ViewBag</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card  bg-dark border border-secondary">
+                <div class="card-body">
+                    <h5 class="card-title">Spedizioni in attesa di consegna</h5>
+                    <p class="card-text">Numero totale: chiocciola Viewbag</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+        <div class="row py-3">
+            <div class="col-sm-6">
+                <div class="card bg-light border border-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">Registra Cliente</h5>
+                        <p class="card-text">Inserisci i dati e aggiungi  un nuovo cliente al database.</p>
+                        @Html.ActionLink("Registrazione Cliente", "NuovoCliente", "Cliente", null, new { @class = "btn btn-outline-success" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card bg-light border border-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">Registra Prenotazione</h5>
+                        <p class="card-text">Registra una nuova prenotazione sul database.</p>
+                        @Html.ActionLink("Registra Prenotazione", "NuovaPrenotazione", "Prenotazione", null, new { @class = "btn btn-outline-success" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <row>
+            <div class="col-12">
+                <div class="card bg-light border border-secondary">
+                    <div class="card-body d-flex flex-column px-3 align-items-center ">
+                         <h5 class="card-title">Sei un dipendente dei nostri alberghi?</h5>
+                            <p class="card-text">Fai il login e accedi ai dati.</p>
+                        @Html.ActionLink("Login Dipendente", "Login", "Login", null, new { @class = "btn btn-outline-success" })
+                    </div>
+                </div>
+            </div>
+        </row>
+        <!--
+    <div class="row py-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body  bg-dark border border-secondary">
+                    <h5 class="card-title">Spedizioni per città destinataria</h5>
+                    <ul class="list-group">
+                        chiocciola foreach (var item in ViewBag.DeliveriesByCity)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center text-light bg-dark border border-secondary">
+                                chiocciola item.Key
+                                <span class="badge badge-primary badge-pill">chiocciola item.Value</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    </main>

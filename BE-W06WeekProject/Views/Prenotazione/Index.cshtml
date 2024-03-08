@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BE_W06WeekProject.Models.Prenotazione>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Nuova Prenotazione", "NuovaPrenotazione")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDPrenotazione)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDCamera)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDServizio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataPrenotazione)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anticipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotaleSaldo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var prenotazione in Model)
+    {
+        <tr>
+            <td>@prenotazione.IDPrenotazione</td>
+            <td>@prenotazione.IDCliente</td>
+            <td>@prenotazione.IDCamera</td>
+            <td>@prenotazione.IDServizio</td>
+            <td>@prenotazione.DataPrenotazione.ToShortDateString()</td>
+            <td>@prenotazione.CheckIn.ToShortDateString()</td>
+            <td>@prenotazione.CheckOut.ToShortDateString()</td>
+            <td>@prenotazione.Anticipo</td>
+            <td>@prenotazione.TotaleSaldo</td>
+        <td>
+    @Html.ActionLink("Edit", "EditPrenotazione", new { id=prenotazione.IDPrenotazione }) |
+    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })  |
+    @Html.ActionLink("Cancella", "DeletePrenotazione", new { id=prenotazione.IDPrenotazione }) |
+    </td>
+    </tr>
+    }
+
+</table>
