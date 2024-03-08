@@ -1,0 +1,39 @@
+﻿@model BE_W06WeekProject.Models.UserGestione
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2 class="mb-0">Benvenuto in</h2>
+    <h1>Polaris</h1>
+    <p>Per visualizzare i contenuti del sito, clicca il bottone!</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-light my-2">Entra</a>
+
+}
+else
+{
+    <h2>Login</h2>
+    <form action="@Url.Action("Login", "Login")" method="post">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeUtente)
+            @Html.TextBoxFor(model => model.NomeUtente, new { @class = "form-control", placeholder = "Username" })
+            @Html.ValidationMessageFor(model => model.NomeUtente, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="btn btn-light my-2">Login</button>
+    </form>
+
+    <div class="text-danger">
+        @ViewBag.AuthError
+    </div>
+}

@@ -122,11 +122,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PrenotazioneController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Camera.cs" />
+    <Compile Include="Models\SiteRoles.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Prenotazione.cs" />
     <Compile Include="Models\Servizio.cs" />
@@ -192,6 +194,8 @@
     <Content Include="Views\Prenotazione\EditPrenotazione.cshtml" />
     <Content Include="Views\Prenotazione\Index.cshtml" />
     <Content Include="Views\Prenotazione\DeletePrenotazione.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

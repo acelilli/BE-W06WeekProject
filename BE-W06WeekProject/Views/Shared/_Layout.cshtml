@@ -19,9 +19,17 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Informazioni", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contatto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <!-- Nascosto agli utenti NON autenticati -->
+                    @if (User.IsInRole("PolarisHead") || User.IsInRole("PolarisStaff"))
+                    {
+                        <li>@Html.ActionLink("Lista Prenotazioni", "Index", "Prenotazione", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Lista Clienti", "Index", "Cliente", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Logout", "Login")" class="btn btn-light my-2 my-sm-0">Esci</a>
+                }
             </div>
         </div>
     </nav>
