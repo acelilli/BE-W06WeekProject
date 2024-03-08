@@ -94,8 +94,8 @@ namespace BE_W06WeekProject.Controllers
                 {
                     string connectionString = ConfigurationManager.ConnectionStrings["Polaris"].ConnectionString;
                     conn = new SqlConnection(connectionString);
-                    string query = @"INSERT INTO Prenotazione (IDCliente, IDCamera, IDServizio, DataPrenotazione, CheckIn, CheckOut, Anticipo, TotaleSaldo, ) 
-                                    VALUES (@IDCliente, @IDCamera, @IDServizio, @DataPrenotazione, @CheckIn, @CheckOut, @Anticipo, @TotaleSaldo, )";
+                    string query = @"INSERT INTO Prenotazione (IDCliente, IDCamera, IDServizio, DataPrenotazione, CheckIn, CheckOut, Anticipo, TotaleSaldo ) 
+                                    VALUES (@IDCliente, @IDCamera, @IDServizio, @DataPrenotazione, @CheckIn, @CheckOut, @Anticipo, @TotaleSaldo )";
 
                     SqlCommand command = new SqlCommand(query, conn);
                     command.Parameters.AddWithValue("@IDCliente", prenotazione.IDCliente);
@@ -114,8 +114,7 @@ namespace BE_W06WeekProject.Controllers
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Errore: " + ex.Message);
-                    ModelState.AddModelError("", "Si è verificato un errore durante il salvataggio della prenotazione. Riprova più tardi.");
+                    ModelState.AddModelError("", "ERRORE:" + ex.Message + ".");
                 }
                 finally
                 {

@@ -26,19 +26,22 @@ namespace BE_W06WeekProject.Models
         public List<SelectListItem> ServicesList { get; set; } // Lista dei servizi aggiuntivi
 
         [DisplayName("Data Prenotazione")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Il campo Data Prenotazione è obbligatorio.")]
-        [RegularExpression(@"^\d{2}/\d{2}/\d{4} \d{2}:\d{2}$", ErrorMessage = "Il formato della data e dell'ora non è valido.")]
 
         public DateTime DataPrenotazione { get; set; }
 
         [DisplayName("Check-In")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Il campo Check-In è obbligatorio.")]
-        [RegularExpression(@"^\d{2}/\d{2}/\d{4} \d{2}:\d{2}$", ErrorMessage = "Il formato della data e dell'ora non è valido.")]
         public DateTime CheckIn { get; set; }
 
         [DisplayName("Check-Out")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Il campo Check-Out è obbligatorio.")]
-        [RegularExpression(@"^\d{2}/\d{2}/\d{4} \d{2}:\d{2}$", ErrorMessage = "Il formato della data e dell'ora non è valido.")]
         public DateTime CheckOut { get; set; }
 
         [DisplayName("Anticipo")]

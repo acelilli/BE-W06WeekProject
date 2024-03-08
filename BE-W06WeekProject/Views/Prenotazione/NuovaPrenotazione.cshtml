@@ -94,33 +94,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Funzione per formattare la data e l'ora nel formato richiesto prima dell'invio al controller
-        function formatDate(date) {
-                var year = date.getFullYear();
-                var month = ('0' + (date.getMonth() + 1)).slice(-2);
-                var day = ('0' + date.getDate()).slice(-2);
-                var hours = ('0' + date.getHours()).slice(-2);
-                var minutes = ('0' + date.getMinutes()).slice(-2);
-                return year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-        }
-
-        // Ascolta il submit del form e formatta la data e l'ora prima dell'invio al controller
-        document.querySelector('form').addEventListener('submit', function (event) {
-            // Formatta la data e l'ora per CheckIn
-            var checkInInput = document.getElementById('CheckIn');
-            var checkInDate = new Date(checkInInput.value);
-            checkInInput.value = formatDate(checkInDate);
-
-            // Formatta la data e l'ora per CheckOut
-            var checkOutInput = document.getElementById('CheckOut');
-            var checkOutDate = new Date(checkOutInput.value);
-            checkOutInput.value = formatDate(checkOutDate);
-
-            var checkInInput = document.getElementById('DataPrenotazione');
-            var checkInDate = new Date(dataPrenotazioneInput.value);
-            checkInInput.value = formatDate(dataPrenotazioneDate);
-        });
-    });
-</script>
