@@ -4,76 +4,99 @@
 
 <main>
     <h1>Benvenut* in Polaris Hotel!</h1>
-        <h2>Servizi disponibili:</h2>
-        <!-- Qui metto i risultati delle azioni asincrone -->
-        <!--
+    <h2>Servizi disponibili:</h2>
+    <!-- Qui metto i risultati delle azioni asincrone -->
     <div class="row py-3">
-        <div class="col-md-6">
-            <div class="card  bg-dark border border-secondary">
+        <div class="col-md-4">
+            <div class="card  bg-light border border-secondary">
                 <div class="card-body">
-                    <h5 class="card-title">Spedizioni in consegna oggi</h5>
-                    <p class="card-text">Numero di spedizioni: chiocciola ViewBag</p>
+                    <h5 class="card-title">Ricerca prenotazione per Codice Fiscale</h5>
+                    <!-- Qui faccio la ricerca per codice fiscale con il suo form -->
+                    <form id="searchForm">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="codiceFiscale" placeholder="Inserisci il codice fiscale">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Cerca</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Risultati della ricerca -->
+                    <div id="searchResults" class="py-3"></div>
                 </div>
             </div>
         </div>
-
-        <div class="col-md-6">
-            <div class="card  bg-dark border border-secondary">
+        <div class="col-md-4">
+            <div class="card bg-light border border-secondary">
                 <div class="card-body">
-                    <h5 class="card-title">Spedizioni in attesa di consegna</h5>
-                    <p class="card-text">Numero totale: chiocciola Viewbag</p>
+                    <h5 class="card-title">Registra Cliente</h5>
+                    <p class="card-text">Inserisci i dati e aggiungi  un nuovo cliente al database.</p>
+                    @Html.ActionLink("Registrazione Cliente", "NuovoCliente", "Cliente", null, new { @class = "btn btn-outline-primary" })
                 </div>
             </div>
         </div>
-    </div> -->
-        <div class="row py-3">
-            <div class="col-sm-6">
-                <div class="card bg-light border border-secondary">
-                    <div class="card-body">
-                        <h5 class="card-title">Registra Cliente</h5>
-                        <p class="card-text">Inserisci i dati e aggiungi  un nuovo cliente al database.</p>
-                        @Html.ActionLink("Registrazione Cliente", "NuovoCliente", "Cliente", null, new { @class = "btn btn-outline-success" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card bg-light border border-secondary">
-                    <div class="card-body">
-                        <h5 class="card-title">Registra Prenotazione</h5>
-                        <p class="card-text">Registra una nuova prenotazione sul database.</p>
-                        @Html.ActionLink("Registra Prenotazione", "NuovaPrenotazione", "Prenotazione", null, new { @class = "btn btn-outline-success" })
-                    </div>
+        <div class="col-md-4">
+            <div class="card bg-light border border-secondary">
+                <div class="card-body">
+                    <h5 class="card-title">Registra Prenotazione</h5>
+                    <p class="card-text">Registra una nuova prenotazione sul database.</p>
+                    @Html.ActionLink("Registra Prenotazione", "NuovaPrenotazione", "Prenotazione", null, new { @class = "btn btn-outline-primary" })
                 </div>
             </div>
         </div>
-        <row>
-            <div class="col-12">
-                <div class="card bg-light border border-secondary">
-                    <div class="card-body d-flex flex-column px-3 align-items-center ">
-                         <h5 class="card-title">Sei un dipendente dei nostri alberghi?</h5>
-                            <p class="card-text">Fai il login e accedi ai dati.</p>
-                        @Html.ActionLink("Login Dipendente", "Login", "Login", null, new { @class = "btn btn-outline-success" })
-                    </div>
-                </div>
-            </div>
-        </row>
-        <!--
-    <div class="row py-3">
+    </div>
+    <row>
         <div class="col-12">
-            <div class="card">
-                <div class="card-body  bg-dark border border-secondary">
-                    <h5 class="card-title">Spedizioni per città destinataria</h5>
-                    <ul class="list-group">
-                        chiocciola foreach (var item in ViewBag.DeliveriesByCity)
-                        {
-                            <li class="list-group-item d-flex justify-content-between align-items-center text-light bg-dark border border-secondary">
-                                chiocciola item.Key
-                                <span class="badge badge-primary badge-pill">chiocciola item.Value</span>
-                            </li>
-                        }
-                    </ul>
+            <div class="card bg-light border border-secondary">
+                <div class="card-body d-flex flex-column px-3 align-items-center ">
+                    <h5 class="card-title">Sei un dipendente dei nostri alberghi?</h5>
+                    <p class="card-text">Fai il login e accedi ai dati.</p>
+                    @Html.ActionLink("Login Dipendente", "Login", "Login", null, new { @class = "btn btn-outline-primary" })
                 </div>
             </div>
         </div>
-    </div> -->
-    </main>
+    </row>
+</main>
+@section Scripts {
+    <script>
+        // Funzione per gestire la ricerca delle prenotazioni per codice fiscale
+        $('#searchForm').submit(function (e) {
+            e.preventDefault(); // Previeni il comportamento predefinito del modulo
+
+            // Ottieni il valore inserito nella searchbar
+            var codiceFiscale = $('#codiceFiscale').val();
+
+            // Effettua una richiesta AJAX per eseguire la ricerca delle prenotazioni
+            $.ajax({
+                url: '@Url.Action("RicercaPrenotazioniCliente", "Home")',
+                type: 'POST',
+                data: { codiceFiscale: codiceFiscale },
+                success: function (response) {
+                    // Pulisci i risultati precedenti
+                    $('#searchResults').empty();
+
+                    // Aggiungi i nuovi risultati alla pagina
+                    $.each(response, function (index, prenotazione) {
+                        // Creazione degli elementi HTML per visualizzare i dati della prenotazione
+                        var html = '<div class="prenotazione">';
+                        html += '<p>ID Cliente: ' + prenotazione.IDCliente + '</p>';
+                        html += '<p>ID Camera: ' + prenotazione.IDCamera + '</p>';
+                        html += '<p>ID Servizio: ' + prenotazione.IDServizio + '</p>';
+                        html += '<p>Data Prenotazione: ' + prenotazione.DataPrenotazione + '</p>';
+                        html += '<p>Check-In: ' + prenotazione.CheckIn + '</p>';
+                        html += '<p>Check-Out: ' + prenotazione.CheckOut + '</p>';
+                        html += '<p>Anticipo: ' + prenotazione.Anticipo + '&euro;</p>';
+                        html += '<p>Totale Saldo: ' + prenotazione.TotaleSaldo + '&euro;</p>';
+                        // Chiudi il div della prenotazione
+                        html += '</div>';
+
+                        // Aggiungi il codice HTML al contenitore dei risultati
+                        $('#searchResults').append(html);
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+}
