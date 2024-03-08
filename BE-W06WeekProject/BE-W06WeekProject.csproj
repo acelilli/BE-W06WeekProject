@@ -128,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Camera.cs" />
+    <Compile Include="Models\CheckoutDetails.cs" />
     <Compile Include="Models\SiteRoles.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Prenotazione.cs" />
@@ -196,6 +197,7 @@
     <Content Include="Views\Prenotazione\DeletePrenotazione.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Logout.cshtml" />
+    <Content Include="Views\Prenotazione\DettagliCheckout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

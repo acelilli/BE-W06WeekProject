@@ -13,6 +13,7 @@ namespace BE_W06WeekProject.Controllers
     public class PrenotazioneController : Controller
     {
         // GET: Prenotazione
+        [Authorize(Roles = "PolarisHead, PolarisStaff")]
         public ActionResult Index()
         {
             List<Prenotazione> prenotazioniList = new List<Prenotazione>();
@@ -430,6 +431,77 @@ namespace BE_W06WeekProject.Controllers
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////// FINE METODI DELETE //////////////////////////////////////////////////
         //////////////////// INIZIO METODI DETTAGLI ///////////////////////////////////
+        public ActionResult DettagliCheckout(int id)
+        {
+            CheckoutDetails checkoutDetails = new CheckoutDetails();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["Polaris"].ConnectionString;
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            string query = @"
+        SELECT 
+            c.Nome AS NomeCliente, c.Cognome AS CognomeCliente, c.CodiceFiscale,
+            c.Citta AS CittaCliente, c.Provincia AS ProvinciaCliente,
+            c.Email, c.Telefono, c.Cellulare,
+            cam.NumeroCamera, cam.Descrizione AS DescrizioneCamera, cam.TipoCamera,
+            p.IDPrenotazione, p.DataPrenotazione, p.CheckIn, p.CheckOut, p.Anticipo, p.TotaleSaldo,
+            s.Nome AS NomeServizio, s.Descrizione AS DescrizioneServizio, s.Prezzo
+        FROM Prenotazione p
+        INNER JOIN Cliente c ON p.IDCliente = c.IDCliente
+        INNER JOIN Camera cam ON p.IDCamera = cam.IDCamera
+        INNER JOIN Servizio s ON p.IDServizio = s.IDServizio
+        WHERE p.IDPrenotazione = @IDPrenotazione";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@IDPrenotazione", id);
+
+            SqlDataReader reader = null;
+
+            try
+            {
+                conn.Open();
+                reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    checkoutDetails.NomeCliente = reader["NomeCliente"].ToString();
+                    checkoutDetails.CognomeCliente = reader["CognomeCliente"].ToString();
+                    checkoutDetails.CodiceFiscale = reader["CodiceFiscale"].ToString();
+                    checkoutDetails.CittaCliente = reader["CittaCliente"].ToString();
+                    checkoutDetails.ProvinciaCliente = reader["ProvinciaCliente"].ToString();
+                    checkoutDetails.EmailCliente = reader["Email"].ToString();
+                    checkoutDetails.TelefonoCliente = reader["Telefono"].ToString();
+                    checkoutDetails.CellulareCliente = reader["Cellulare"].ToString();
+                    checkoutDetails.NumeroCamera = reader["NumeroCamera"].ToString();
+                    checkoutDetails.DescrizioneCamera = reader["DescrizioneCamera"].ToString();
+                    checkoutDetails.TipoCamera = reader["TipoCamera"].ToString();
+                    checkoutDetails.IDPrenotazione = Convert.ToInt32(reader["IDPrenotazione"]);
+                    checkoutDetails.DataPrenotazione = Convert.ToDateTime(reader["DataPrenotazione"]);
+                    checkoutDetails.CheckIn = Convert.ToDateTime(reader["CheckIn"]);
+                    checkoutDetails.CheckOut = Convert.ToDateTime(reader["CheckOut"]);
+                    checkoutDetails.Anticipo = Convert.ToDecimal(reader["Anticipo"]);
+                    checkoutDetails.TotaleSaldo = Convert.ToDecimal(reader["TotaleSaldo"]);
+                    checkoutDetails.NomeServizio = reader["NomeServizio"].ToString();
+                    checkoutDetails.DescrizioneServizio = reader["DescrizioneServizio"].ToString();
+                    checkoutDetails.PrezzoServizio = Convert.ToDecimal(reader["Prezzo"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gestisci l'eccezione
+                ViewBag.Error = "Si è verificato un errore durante il recupero dei dettagli della prenotazione: " + ex.Message;
+            }
+            finally
+            {
+                // Chiudi il reader e la connessione
+                if (reader != null)
+                    reader.Close();
+
+                conn.Close();
+            }
+
+            return View(checkoutDetails);
+        }
 
     }
 }

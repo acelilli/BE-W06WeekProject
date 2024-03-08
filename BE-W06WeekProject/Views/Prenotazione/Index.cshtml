@@ -55,7 +55,7 @@
             <td>@prenotazione.TotaleSaldo</td>
         <td>
     @Html.ActionLink("Edit", "EditPrenotazione", new { id=prenotazione.IDPrenotazione }) |
-    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })  |
+    @Html.ActionLink("Dettagli per il Checkout", "DettagliCheckout", new { id=prenotazione.IDPrenotazione })  |
     @Html.ActionLink("Cancella", "DeletePrenotazione", new { id=prenotazione.IDPrenotazione }) |
     </td>
     </tr>

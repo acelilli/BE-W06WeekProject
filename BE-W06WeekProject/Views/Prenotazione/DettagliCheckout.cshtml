@@ -1,0 +1,181 @@
+﻿@model BE_W06WeekProject.Models.CheckoutDetails
+
+@{
+    ViewBag.Title = "DettagliCheckout";
+}
+
+<h2>DettagliCheckout</h2>
+
+<div>
+    <h4>CheckoutDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CognomeCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CognomeCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodiceFiscale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodiceFiscale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CittaCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CittaCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProvinciaCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProvinciaCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefonoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefonoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CellulareCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CellulareCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroCamera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroCamera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescrizioneCamera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescrizioneCamera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoCamera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoCamera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDPrenotazione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDPrenotazione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataPrenotazione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataPrenotazione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anticipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anticipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotaleSaldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotaleSaldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeServizio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeServizio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescrizioneServizio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescrizioneServizio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrezzoServizio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrezzoServizio)
+        </dd>
+
+    </dl>
+</div>
+<!-- Bottoni per modifica e cancella prenotazione se riesco a metterli -->
+@if (User.IsInRole("PolarisHead") || User.IsInRole("PolarisStaff"))
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
